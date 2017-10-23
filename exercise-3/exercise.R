@@ -1,5 +1,6 @@
 # Exercise 3: Data Frame Practice with `dplyr`.
 # Use a different appraoch to accomplish the same tasks as exercise-1
+## GO FROM SPECIFIC TO BROAD WHEN PIPING???
 
 
 # Install devtools package: allows installations from GitHub
@@ -13,13 +14,19 @@ devtools::install_github("hadley/fueleconomy")
 
 
 # Which Accura model has the best hwy MPG in 2015? (without method chaining)
-
+best.model <- select(
+filter(
+  filter(vehicles, make =='Acura', year==2015), hwy = max(hwy)
+), model
+  )
 
 # Which Accura model has the best hwy MPG in 2015? (nesting functions)
 
 
 # Which Accura model has the best hwy MPG in 2015? (pipe operator)
-
+best <- filter(vehicles, make== 'Acura', year==2015) %>%
+        filter(hwy == max(hwy)) %>% 
+        select(model)
 
 ### Bonus ###
 
